@@ -1,2 +1,62 @@
 # vanillagrid.min
-A simple grid using only Vanilla JS.
+A simple grid using only Vanilla JS.<br><br>
+
+### Download Vanillagrid v1.0.0 release!
+### Or <pre>npm i vanillagrid</pre>
+Home page: https://vanilla-grid.github.io
+
+## Why Vanillagrid?
+* IIt can be applied to a wide range of environments using only Vanilla JS and ES5 syntax.
+* Managing data is intuitive by getting and setting JSON data.
+* You can achieve excellent performance by using predefined properties, events, and methods.
+* You can manage the lifecycle of objects independently and customize more delicately through management logic.
+* It is implemented to minimize the impact on or from existing css or javascript sources.
+* Does not use innerHTML or eval.
+* It is very lightweight with a single js file.
+
+## Anyone can use it very easily.
+1. use npm
+
+<pre>npm i vanillagrid</pre>
+
+2. Or download min.js file and Include js
+
+<pre>
+&lt;script src="../Vanillangrid.min.1.0.0.js"&gt;&lt;/script&gt;
+</pre>
+
+3. Lastly, the div tag is added!
+
+<pre>
+&lt;body&gt;
+&lt;!--
+	The id attribute of grid and column is mandatory.
+	&lt;vanilla-grid id="gridId" ...grid attributes &gt;
+		&lt;v-col id="columnId01" ...column attributes &gt;&lt;/v-col&gt;
+		... columns
+	&lt;/vanilla-grid&gt;
+--&gt;
+&lt;/body&gt;
+</pre>
+
+4. and data load
+<pre>
+ &lt;script&gt;
+	const keyValues = [
+		{
+			columnId01 : 'value', columnId02 : 'value', //column key-value..
+		},
+		//...
+	]
+	gridId.load(keyValues)
+ &lt;/script&gt;
+</pre>
+
+#### [Vanilla Grid has about 30 grid and column properties, about 30 customizable events, and over 240 methods. Please refer to the homepage!](https://vanilla-grid.github.io)
+
+## Purpose of production
+Vanillagrid is a solo development. It was developed for learning javascript. Therefore, 100% reliability cannot be guaranteed when using it, and there are some limitations. However, I believe it will show excellent performance. Vanillagrid started development to reduce the time required to develop a new grid each time I proceed with a personal project. It was developed with the goal of developing a grid that can be used without libraries or frameworks in any environment such as Jquery, Vue, React, etc. For this reason, this program uses only Vanilla JS. The pros and cons of Vanillagrid are as follows.
+
+## Contact
+hani son.  
+hison0319@gmail.com
