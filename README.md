@@ -15,17 +15,17 @@ Home page: https://vanilla-grid.github.io
 * It is very lightweight with a single js file.
 
 ## Anyone can use it very easily.
-1. use npm
+1-1. use npm
 
 <pre>npm i vanillagrid</pre>
 
-2. Or download min.js file and Include js
+1-2. Or download min.js file and Include js
 
 <pre>
 &lt;script src="../Vanillangrid.min.1.0.0.js"&gt;&lt;/script&gt;
 </pre>
 
-3. Lastly, the div tag is added!
+2. And, tag is added.
 
 <pre>
 &lt;body&gt;
@@ -39,7 +39,7 @@ Home page: https://vanilla-grid.github.io
 &lt;/body&gt;
 </pre>
 
-4. and data load
+3. Lastly, data load!
 <pre>
  &lt;script&gt;
 	const keyValues = [
