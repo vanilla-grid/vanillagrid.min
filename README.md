@@ -52,7 +52,7 @@ Home page: https://vanilla-grid.github.io
  &lt;/script&gt;
 </pre>
 
-#### [Vanilla Grid has about 30 grid and column properties, about 30 customizable events, and over 240 methods. Please refer to the homepage!](https://vanilla-grid.github.io)
+#### [Vanilla Grid has about 30 grid and column properties, about 30 customizable events, and over 240 methods. Please refer to the homepage!](https://vanilla-grid.github.io/?view=api&lang=ENG)
 
 ## Purpose of production
 Vanillagrid is a solo development. It was developed for learning javascript. Therefore, 100% reliability cannot be guaranteed when using it, and there are some limitations. However, I believe it will show excellent performance. Vanillagrid started development to reduce the time required to develop a new grid each time I proceed with a personal project. It was developed with the goal of developing a grid that can be used without libraries or frameworks in any environment such as Jquery, Vue, React, etc. For this reason, this program uses only Vanilla JS. The pros and cons of Vanillagrid are as follows.
