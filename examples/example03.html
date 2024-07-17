@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanillagrid Example 3</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <script src="../dist/Vanillagrid.min.1.0.0.js"></script>
+</head>
+<body>
+    <h2>Example 3</h2>
+    <br>
+    <vanilla-grid id="grid" rownumSize="40px" verticalBorderSize="0">
+        <v-col id="col0" header="header;img;Picture" dataType="img" width="140px"></v-col>
+        <v-col id="col1" header=";text;Whale Name" dataType="text" width="130px"></v-col>
+        <v-col id="col2" header=";code;Size Code" dataType="code" codes="L;M;S" width="60px"></v-col>
+        <v-col id="col3" header=";mask;ID" dataType="mask" format="99999" width="60px" align="center"></v-col>
+        <v-col id="col4" header=";date;Last Found\nDate" dataType="date" width="120px"></v-col>
+        <v-col id="col5" header=";month;Last Found\nHabitat Month" dataType="month" width="120px" footer="MAX;MIN"></v-col>
+        <v-col id="col6" header=";number;Avg\nLength" dataType="number" width="80px" footer="$$MAX;$$MIN" format="#,##0.## (m)"></v-col>
+        <v-col id="col7" header=";select;Protection\nStatus" dataType="select" width="150px"></v-col>
+        <v-col id="col8" header=";checkbox;Protected" dataType="checkbox" width="90px"></v-col>
+        <v-col id="col9" header=";button;Play sound" dataType="button" width="120px"></v-col>
+        <v-col id="col10" header=";link;View More" dataType="link" width="100px"></v-col>
+    </vanilla-grid>
+    <audio id="whaleSound0" style="display: none;">
+        <source src="sound/sound01.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="whaleSound1" style="display: none;">
+        <source src="sound/sound02.mp3" type="audio/mpeg">
+    </audio>
+
+<script>
+        function grid_onClickButton (row, colId, buttonNode) {
+            const isAudioSupported = function () {
+                var audio = document.createElement('audio');
+                return !!audio.canPlayType;
+            }
+            if (isAudioSupported()) {
+                const audio = document.getElementById('whaleSound' + row%2);
+                audio.play();
+            } else {
+                alert('Your browser does not support audio playback.');
+            }
+        }
+        
+        function vanillagrid_onBeforeCreate (e, vg) {
+            //filter, sort span customize
+            vg.filterSpan = document.createElement("i");
+            vg.filterSpan.setAttribute("class", "fas fa-search");
+
+            vg.sortAscSpan = document.createElement("i");
+            vg.sortAscSpan.setAttribute("class", "fas fa-sort-up");
+            vg.sortAscSpan.style.marginLeft = "7px";
+
+            vg.sortDescSpan = document.createElement("i");
+            vg.sortDescSpan.setAttribute("class", "fas fa-sort-down");
+            vg.sortDescSpan.style.marginLeft = "7px";
+
+            //add data type
+            vg.dataType = {
+                img : {
+                    cellStyle: {
+                        justifyContent: "center",
+                        textAlign: "center",
+                        padding: 0,
+                    },
+                    onSelected : function (target, data) {
+                        if(target.firstChild.children[0]) target.firstChild.children[0].style.setProperty("opacity", "0.2");
+                    },
+                    onUnselected : function (target, data) {
+                        if(target.firstChild.children[0]) target.firstChild.children[0].style.removeProperty("opacity");
+                    },
+                    getValue: function (value) {
+                        if(!value) return null;
+                        return value;
+                    },
+                    getText: function (value) {
+                        if(!value) return null;
+                        return value.alt;
+                    },
+                    getChildNode: function (data) {
+                        const childNode = document.createElement("span");
+                        if(!data) return childNode;
+                        if(!data.value) return childNode;
+                        childNode.style.display = "flex";
+                        childNode.style.alignItems = "center";
+                        childNode.style.position = "relative";
+                        childNode.style.overflow = "hidden";
+                        childNode.style.width = "100%";
+                        const img = document.createElement("img");
+                        const alt = document.createElement("span");
+                        img.style.width = "100%"
+                        // img.style.height = "100px"
+                        img.style.zIndex = "1";
+                        img.src = data.value.src;
+                        img.alt = data.text;
+                        alt.style.position = "absolute";
+                        alt.style.fontSize = "12px";
+                        alt.style.color = "black";
+                        alt.style.textAlign = "left";
+                        alt.style.display = "inline-block";
+                        alt.style.width = "100%";
+                        alt.style.whiteSpace = "normal";
+                        alt.style.wordBreak = "break-all";
+                        alt.textContent = data.text;
+                        
+                        img.gridId = data.gridId;
+                        img.cellRow = data.row;
+                        img.cellCol = data.col;
+
+                        childNode.append(img);
+                        childNode.append(alt);
+                        childNode.addEventListener('click', function (e) {
+                            window[e.target.gridId].setTargetCell(e.target.cellRow, e.target.cellCol);
+                        })
+                        childNode.addEventListener('dblclick', function (e) {
+                            window[e.target.gridId].editCell(e.target.cellRow, e.target.cellCol);
+                        })
+                        return childNode;
+                    },
+                    getEditor: function (target, data, call_modify, call_endEdit) {
+                        if(!data.value) return null;
+
+                        const editor = document.createElement("input");
+                        editor.setAttribute("type","text");
+                        editor.style.width = target.offsetWidth + 'px';
+                        editor.style.height = target.scrollHeight + editor.offsetHeight - editor.clientHeight + 'px';
+                        editor.style.position = "absolute";
+                        editor.style.zIndex = "200";
+                        editor.value = data.text;
+
+                        editor.addEventListener('keydown', function (e) {
+                            switch (e.key) {
+                                case 'Enter':
+                                    call_modify();
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                    break;
+                                case 'Escape':
+                                    call_endEdit();
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                    break;
+                                case 'Tab':
+                                    call_modify();
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                    break;
+                                case 'F2':
+                                    call_modify();
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        });
+                        return editor;
+                    },
+                    getEditedValue: function (target, data) {
+                        if(!data.value) return null;
+                        const newValue = data.value;
+                        newValue.alt = target.value;
+                        return newValue;
+                    },
+                    getFilterValue: function (value) {
+                        if(!value) return null;
+                        return "title : " + value.alt;
+                    },
+                    getSortValue: function (value) {
+                        if(!value) return null;
+                        return value.alt;
+                    },
+                    getCopyValue: function (value) {
+                        if(!value) return null;
+                        return value.alt;
+                    },
+                    getPasteValue: function (data, text) {
+                        if(!data.value) return null;
+                        const value = data.value;
+                        value.alt = text;
+                        return value;
+                    },
+                }
+            };
+        }
+
+        function vanillagrid_onAfterCreate (e, vg) {
+            const data = [
+                {   
+                    "col0": {src:"whale/Blue Whale.jpg", alt:"Blue Whale from Wiki"},
+                    "col1": "Blue Whale",
+                    "col2": "L",
+                    "col3": "00001",
+                    "col4": "20230115",
+                    "col5": "202301",
+                    "col6": 24,
+                    "col7": [
+                        {"value": "1", "text": "Endangered", "selected": true},
+                        {"value": "2", "text": "Vulnerable"},
+                        {"value": "3", "text": "Least Concern"}
+                    ],
+                    "col8": "Y",
+                    "col9": "play sound",
+                    "col10": {"value": "https://en.wikipedia.org/wiki/Blue_whale", "text": "View Details"}
+                },
+                {
+                    "col0": {src:"whale/Humpback Whale.jpg", alt:"Humpback Whale from Wiki"},
+                    "col1": "Humpback Whale",
+                    "col2": "L",
+                    "col3": "00002",
+                    "col4": "20230220",
+                    "col5": "202302",
+                    "col6": 15,
+                    "col7": [
+                        {"value": "1", "text": "Endangered"},
+                        {"value": "2", "text": "Vulnerable", "selected": true},
+                        {"value": "3", "text": "Least Concern"}
+                    ],
+                    "col8": "N",
+                    "col9": "play sound",
+                    "col10": {"value": "https://en.wikipedia.org/wiki/Humpback_whale", "text": "View Details"}
+                },
+                {
+                    "col0": {src:"whale/Sperm Whale.jpg", alt:"Sperm Whale from Wiki"},
+                    "col1": "Sperm Whale",
+                    "col2": "L",
+                    "col3": "00003",
+                    "col4": "20230310",
+                    "col5": "202303",
+                    "col6": 18,
+                    "col7": [
+                        {"value": "1", "text": "Endangered"},
+                        {"value": "2", "text": "Vulnerable", "selected": true},
+                        {"value": "3", "text": "Least Concern"}
+                    ],
+                    "col8": "Y",
+                    "col9": "play sound",
+                    "col10": {"value": "https://en.wikipedia.org/wiki/Sperm_whale", "text": "View Details"}
+                },
+                {
+                    "col0": {src:"whale/Fin Whale.jpg", alt:"Fin Whale from Wiki"},
+                    "col1": "Fin Whale",
+                    "col2": "L",
+                    "col3": "00004",
+                    "col4": "20230522",
+                    "col5": "202305",
+                    "col6": 21,
+                    "col7": [
+                        {"value": "1", "text": "Endangered", "selected": true},
+                        {"value": "2", "text": "Vulnerable"},
+                        {"value": "3", "text": "Least Concern"}
+                    ],
+                    "col8": "N",
+                    "col9": "play sound",
+                    "col10": {"value": "https://en.wikipedia.org/wiki/Fin_whale", "text": "View Details"}
+                },
+                {
+                    "col0": {src:"whale/Gray Whale.jpg", alt:"Gray Whale from Wiki"},
+                    "col1": "Gray Whale",
+                    "col2": "L",
+                    "col3": "00005",
+                    "col4": "20230625",
+                    "col5": "202306",
+                    "col6": 15,
+                    "col7": [
+                        {"value": "1", "text": "Endangered", "selected": true},
+                        {"value": "2", "text": "Vulnerable"},
+                        {"value": "3", "text": "Least Concern"}
+                    ],
+                    "col8": "Y",
+                    "col9": "play sound",
+                    "col10": {"value": "https://en.wikipedia.org/wiki/Fin_whale", "text": "View Details"}
+                },
+                {
+                    "col0": {src:"whale/Orca.jpg", alt:"Orca from Wiki"},
+                    "col1": "Orca",
+                    "col2": "M",
+                    "col3": "00006",
+                    "col4": "20230418",
+                    "col5": "202304",
+                    "col6": 8,
+                    "col7": [
+                        {"value": "1", "text": "Endangered"},
+                        {"value": "2", "text": "Vulnerable"},
+                        {"value": "3", "text": "Least Concern", "selected": true}
+                    ],
+                    "col8": "N",
+                    "col9": "play sound",
+                    "col10": {"value": "https://en.wikipedia.org/wiki/Orca", "text": "View Details"}
+                },
+                {
+                    "col0": {src:"whale/False Killer Whale.jpg", alt:"False Killer Whale from Wiki"},
+                    "col1": "False Killer Whale",
+                    "col2": "M",
+                    "col3": "00007",
+                    "col4": "20230805",
+                    "col5": "202308",
+                    "col6": 10,
+                    "col7": [
+                        {"value": "1", "text": "Endangered"},
+                        {"value": "2", "text": "Vulnerable", "selected": true},
+                        {"value": "3", "text": "Least Concern"}
+                    ],
+                    "col8": "Y",
+                    "col9": "play sound",
+                    "col10": {"value": "https://en.wikipedia.org/wiki/False_killer_whale", "text": "View Details"}
+                },
+                {
+                    "col0": {src:"whale/Beluga Whale.jpg", alt:"Beluga Whale from Wiki"},
+                    "col1": "Beluga Whale",
+                    "col2": "S",
+                    "col3": "00008",
+                    "col4": "20230730",
+                    "col5": "202307",
+                    "col6": 6,
+                    "col7": [
+                        {"value": "1", "text": "Endangered"},
+                        {"value": "2", "text": "Vulnerable"},
+                        {"value": "3", "text": "Least Concern", "selected": true}
+                    ],
+                    "col8": "Y",
+                    "col9": "play sound",
+                    "col10": {"value": "https://en.wikipedia.org/wiki/Beluga_whale", "text": "View Details"}
+                },
+                {
+                    "col0": {src:"whale/Dolphin.jpg", alt:"Dolphin from Wiki"},
+                    "col1": "Dolphin",
+                    "col2": "S",
+                    "col3": "00009",
+                    "col4": "20230912",
+                    "col5": "202309",
+                    "col6": 2.5,
+                    "col7": [
+                        {"value": "1", "text": "Endangered"},
+                        {"value": "2", "text": "Vulnerable"},
+                        {"value": "3", "text": "Least Concern", "selected": true}
+                    ],
+                    "col8": "N",
+                    "col9": "play sound",
+                    "col10": {"value": "https://en.wikipedia.org/wiki/Dolphin", "text": "View Details"}
+                },
+                {
+                    "col0": {src:"whale/Minke Whale.jpg", alt:"Minke Whale from Wiki"},
+                    "col1": "Minke Whale",
+                    "col2": "M",
+                    "col3": "00010",
+                    "col4": "20231019",
+                    "col5": "202310",
+                    "col6": 8,
+                    "col7": [
+                        {"value": "1", "text": "Endangered"},
+                        {"value": "2", "text": "Vulnerable", "selected": true},
+                        {"value": "3", "text": "Least Concern"}
+                    ],
+                    "col8": "Y",
+                    "col9": "play sound",
+                    "col10": {"value": "https://en.wikipedia.org/wiki/Minke_whale", "text": "View Details"}
+                }
+            ];
+    
+            grid.load(data);
+        }
+    </script>
+</body>
+</html>
