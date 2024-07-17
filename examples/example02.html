@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanillagrid Example 2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <script src="../dist/Vanillagrid.min.1.0.0.js"></script>
+</head>
+<body>
+    <h2>Example 2</h2>
+    <br>
+    <vanilla-grid id="grid" lockedColor="false">
+        <v-col id="dept" header="Click the Sigma button to the left of the header;filter1(mask);dept " dataType="mask" format="AAA99" width="100" locked="true"></v-col>
+        <v-col id="f_nm" header=";filter2(text);first name" dataType="text" width="120" align="center" locked="true"></v-col>
+        <v-col id="l_nm" header=";filter3(text);last name" dataType="text" width="120" align="center" locked="true"></v-col>
+        <v-col id="d_o_j" header=";filter4(month);DOJ" dataType="month" width="120" locked="true"></v-col>
+        <v-col id="e_id" header="Please double click;sort1(text);Employee ID" dataType="text" width="120" align="center" locked="true" footer="MAX;MIN;AVG;SUM"></v-col>
+        <v-col id="salary" header=";sort2(number);salary" dataType="number" format="$ #,###.00" width="150" footer="$$MAX;$$MIN;$$AVG;$$SUM"></v-col>
+        <v-col id="status" header=";checkbox;status" dataType="checkbox" width="80"></v-col>
+    </vanilla-grid>
+
+    <script>
+        function vanillagrid_onBeforeCreate (e, vg) {
+            //filter, sort span customize
+            vg.filterSpan = document.createElement("i");
+            vg.filterSpan.setAttribute("class", "fas fa-search");
+
+            vg.sortAscSpan = document.createElement("i");
+            vg.sortAscSpan.setAttribute("class", "fas fa-sort-up");
+            vg.sortAscSpan.style.marginLeft = "7px";
+
+            vg.sortDescSpan = document.createElement("i");
+            vg.sortDescSpan.setAttribute("class", "fas fa-sort-down");
+            vg.sortDescSpan.style.marginLeft = "7px";
+        }
+        function vanillagrid_onAfterCreate (e, vg) {
+            const data = [
+                {
+                    dept : "AAA01",
+                    f_nm : "James",
+                    l_nm : "Smith",
+                    d_o_j : "201603",
+                    e_id : "7",
+                    salary : 100000,
+                    status : "Y",
+                },
+                {
+                    dept : "AAA01",
+                    f_nm : "Robert",
+                    l_nm : "Johnson",
+                    d_o_j : "200103",
+                    e_id : "2",
+                    salary : 200000,
+                    status : "Y",
+                },
+                {
+                    dept : "AAA01",
+                    f_nm : "Michael",
+                    l_nm : "Williams",
+                    d_o_j : "200803",
+                    e_id : "4",
+                    salary : 150000,
+                    status : "N",
+                },
+                {
+                    dept : "AAA01",
+                    f_nm : "Thomas",
+                    l_nm : "Smith",
+                    d_o_j : "202403",
+                    e_id : "46",
+                    salary : 50000,
+                    status : "Y",
+                },
+                {
+                    dept : "AAA01",
+                    f_nm : "William",
+                    l_nm : "Brown",
+                    d_o_j : "202203",
+                    e_id : "25",
+                    salary : 70000,
+                    status : "N",
+                },
+                {
+                    dept : "AAA01",
+                    f_nm : "Charles",
+                    l_nm : "Jones",
+                    d_o_j : "202103",
+                    e_id : "27",
+                    salary : 30000,
+                    status : "N",
+                },
+                {
+                    dept : "AAA02",
+                    f_nm : "David",
+                    l_nm : "Smith",
+                    d_o_j : "201403",
+                    e_id : "12",
+                    salary : 180000,
+                    status : "N",
+                },
+                {
+                    dept : "AAA02",
+                    f_nm : "James",
+                    l_nm : "Jones",
+                    d_o_j : "202303",
+                    e_id : "26",
+                    salary : 80000,
+                    status : "N",
+                },
+                {
+                    dept : "AAA02",
+                    f_nm : "Richard",
+                    l_nm : "Garcia",
+                    d_o_j : "202203",
+                    e_id : "24",
+                    salary : 60000,
+                    status : "Y",
+                },
+                {
+                    dept : "AAA02",
+                    f_nm : "David",
+                    l_nm : "Miller",
+                    d_o_j : "202403",
+                    e_id : "48",
+                    salary : 90000,
+                    status : "Y",
+                },
+                {
+                    dept : "AAA02",
+                    f_nm : "Joseph",
+                    l_nm : "Davis",
+                    d_o_j : "202403",
+                    e_id : "34",
+                    salary : 40000,
+                    status : "Y",
+                },
+                {
+                    dept : "AAA02",
+                    f_nm : "Richard",
+                    l_nm : "Miller",
+                    d_o_j : "202303",
+                    e_id : "35",
+                    salary : 50000,
+                    status : "Y",
+                },
+                {
+                    dept : "BBB01",
+                    f_nm : "Joseph",
+                    l_nm : "Davis",
+                    d_o_j : "200403",
+                    e_id : "3",
+                    salary : 140000,
+                    status : "Y",
+                },
+                {
+                    dept : "BBB01",
+                    f_nm : "Thomas",
+                    l_nm : "Johnson",
+                    d_o_j : "200903",
+                    e_id : "9",
+                    salary : 110000,
+                    status : "N",
+                },
+                {
+                    dept : "BBB01",
+                    f_nm : "Charles",
+                    l_nm : "Brown",
+                    d_o_j : "200703",
+                    e_id : "11",
+                    salary : 130000,
+                    status : "Y",
+                },
+                {
+                    dept : "BBB01",
+                    f_nm : "James",
+                    l_nm : "Rodriguez",
+                    d_o_j : "201303",
+                    e_id : "14",
+                    salary : 120000,
+                    status : "N",
+                },
+                {
+                    dept : "BBB02",
+                    f_nm : "Richard",
+                    l_nm : "Garcia",
+                    d_o_j : "200803",
+                    e_id : "10",
+                    salary : 190000,
+                    status : "Y",
+                },
+                {
+                    dept : "BBB02",
+                    f_nm : "David",
+                    l_nm : "Martinez",
+                    d_o_j : "202403",
+                    e_id : "37",
+                    salary : 60000,
+                    status : "Y",
+                },
+                {
+                    dept : "BBB02",
+                    f_nm : "Robert",
+                    l_nm : "Rodriguez",
+                    d_o_j : "202303",
+                    e_id : "31",
+                    salary : 90000,
+                    status : "N",
+                },
+                {
+                    dept : "BBB02",
+                    f_nm : "James",
+                    l_nm : "Williams",
+                    d_o_j : "202403",
+                    e_id : "40",
+                    salary : 60000,
+                    status : "Y",
+                },
+            ];
+    
+            grid.load(data);
+        }
+    </script>
+</body>
+</html>
