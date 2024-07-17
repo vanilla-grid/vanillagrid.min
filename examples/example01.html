@@ -9,8 +9,54 @@
 <body>
     <h2>Example 1</h2>
     <br>
-    <vanilla-grid id="test1">
-        <v-col id="col1" header="header" dataType="text" width="400"></v-col>
+    <vanilla-grid id="grid" height="500px">
+        <v-col id="col1" header="header" dataType="text" width="600"></v-col>
     </vanilla-grid>
+    <button id="listBtn">list</button>
+    <button id="addBtn">add</button>
+    <button id="removeBtn">remove</button>
+    <button id="saveBtn">save</button>
+
+    <script>
+        const data = [
+            {
+                col1 : 'This is a text dataType.\nDouble-click to create an editor.\nPress F2 to create an editor.\nWhen you press the enter key, editor focus.\nTry it!',
+            },
+        ];
+
+        function grid_onLoad () {
+            grid.load(data);
+        }
+
+        window.addEventListener('load', function (e) {
+            grid_onLoad();
+        })
+
+        document.getElementById('listBtn').addEventListener('click', function (e) {
+            grid_onLoad();
+        });
+
+        document.getElementById('addBtn').addEventListener('click', function (e) {
+            grid.addRow();
+        });
+
+        document.getElementById('removeBtn').addEventListener('click', function (e) {
+            const targetRow = grid.getTargetRow();
+            if(!targetRow) {
+                alert('Please select row.');
+                return false;
+            }
+            grid.removeRow(targetRow);
+        });
+
+        document.getElementById('saveBtn').addEventListener('click', function (e) {
+            const values = grid.getValues();
+            values.forEach(value => {
+                value['v-g-status'] = null;
+            });
+            data.splice(0, data.length, ...values);
+            grid_onLoad();
+        });
+    </script>
 </body>
 </html>
