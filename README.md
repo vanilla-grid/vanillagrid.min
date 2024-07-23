@@ -2,7 +2,7 @@
 A simple grid using only Vanilla JS.<br><br>
 
 ### Download Vanillagrid v1.0.0 release!
-### Or <pre>npm i vanillagrid</pre>
+### Or Use npm & webpack
 Home page: https://vanilla-grid.github.io
 
 ## Why Vanillagrid?
@@ -20,7 +20,7 @@ Home page: https://vanilla-grid.github.io
 <pre>npm i vanillagrid</pre>
 
 <pre>
-//index.js(bundle.js)
+//index.js(If use webpack bundle.js)
 import vg from 'vanillagrid';
 vg.create();
 </pre>
