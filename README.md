@@ -25,6 +25,15 @@ import vg from 'vanillagrid';
 vg.create();
 </pre>
 
+<pre>
+&lt;body&gt;
+	&lt;!-- logic..
+	&lt;vanilla-grid id="grid"..
+	 --&gt;
+	&lt;script src="dist/main.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+</pre>
+
 ### 1-2. Or Include min.js file and use src
 
 <pre>
