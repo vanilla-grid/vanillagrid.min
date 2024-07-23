@@ -15,17 +15,17 @@ Home page: https://vanilla-grid.github.io
 * It is very lightweight with a single js file.
 
 ## Anyone can use it very easily.
-### 1-1. use npm
+### 1-1. use npm & webpack
 
 <pre>npm i vanillagrid</pre>
 
 <pre>
-//index.js
+//index.js(bundle.js)
 import vg from 'vanillagrid';
 vg.create();
 </pre>
 
-### 1-2. Or download min.js file and Include js
+### 1-2. Or Include min.js file and use src
 
 <pre>
 &lt;script src="../Vanillangrid.min.1.0.0.js"&gt;&lt;/script&gt;
