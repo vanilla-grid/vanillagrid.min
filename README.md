@@ -20,7 +20,7 @@ Home page: https://vanilla-grid.github.io
 <pre>npm i vanillagrid</pre>
 
 <pre>
-//index.js(If use webpack bundle.js)
+//index.js(If use webpack main.js)
 import vg from 'vanillagrid';
 vg.create();
 </pre>
