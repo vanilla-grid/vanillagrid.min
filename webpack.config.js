@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: './src/Vanillagrid.js',
   output: {
-    filename: 'Vanillagrid.webpack.1.0.0.js',
+    filename: 'Vanillagrid.bundle.js',
     path: path.resolve(__dirname, 'dist'),
     library: 'Vanillagrid',
     libraryTarget: 'umd',
