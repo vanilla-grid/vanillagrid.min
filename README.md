@@ -20,7 +20,7 @@ Home page: https://vanilla-grid.github.io
 <pre>npm i vanillagrid</pre>
 
 <pre>
-//index.js(If use webpack main.js)
+//src/index.js
 import vg from 'vanillagrid';
 vg.create();
 </pre>
@@ -33,6 +33,8 @@ vg.create();
 	&lt;script src="dist/main.js"&gt;&lt;/script&gt;
 &lt;/body&gt;
 </pre>
+#### ※ The dist/Vanillagrid.min.1.0.0.js file of git vanillagrid.min can be used as a header declaration.
+#### ※ The dist/Vanillagrid.webpack.1.0.0.js file in git vanillagrid.min is used in the webpack method.
 
 ### 1-2. Or Include min.js file and use src
 
