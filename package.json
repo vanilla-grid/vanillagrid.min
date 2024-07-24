@@ -1,8 +1,8 @@
 {
   "name": "vanillagrid",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple grid using only Vanilla JS.",
-  "main": "dist/Vanillagrid.webpack.1.0.0.js",
+  "main": "dist/Vanillagrid.bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
