@@ -33,15 +33,16 @@ vg.create();
 	&lt;script src="dist/main.js"&gt;&lt;/script&gt;
 &lt;/body&gt;
 </pre>
-#### ※ The dist/Vanillagrid.min.1.0.0.js file of git vanillagrid.min can be used as a header declaration.
-#### ※ The dist/Vanillagrid.bundle.js file in git vanillagrid.min is used in the webpack method.
-#### ※ The header declaration method through the Vanillagrid.min file automatically manages the life cycle of the vanilla grid, while the webpack method through the Vanillagrid.bundle file requires the user to manage the life cycle.
 
 ### 1-2. Or Include min.js file and use src
 
 <pre>
 &lt;script src="../Vanillangrid.min.1.0.0.js"&gt;&lt;/script&gt;
 </pre>
+
+#### ※ The dist/Vanillagrid.min.1.0.0.js file of git vanillagrid.min can be used as a header declaration.
+#### ※ The dist/Vanillagrid.bundle.js file in git vanillagrid.min is used in the webpack method.
+#### ※ The header declaration method through the Vanillagrid.min file automatically manages the life cycle of the vanilla grid, while the webpack method through the Vanillagrid.bundle file requires the user to manage the life cycle.
 
 ### 2. And, tag is added.
 
