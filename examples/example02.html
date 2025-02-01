@@ -21,7 +21,7 @@
     </vanilla-grid>
 
     <script>
-        function vanillagridOnBeforeCreate (e, vg) {
+        function vanillagrid_onBeforeCreate (e, vg) {
             //filter, sort span customize
             vg.filterSpan = document.createElement("i");
             vg.filterSpan.setAttribute("class", "fas fa-search");
@@ -34,7 +34,7 @@
             vg.sortDescSpan.setAttribute("class", "fas fa-sort-down");
             vg.sortDescSpan.style.marginLeft = "7px";
         }
-        function vanillagridOnAfterCreate (e, vg) {
+        function vanillagrid_onAfterCreate (e, vg) {
             const data = [
                 {
                     dept : "AAA01",
