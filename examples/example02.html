@@ -11,17 +11,17 @@
     <h2>Example 2</h2>
     <br>
     <vanilla-grid id="grid" lockedColor="false">
-        <v-col id="dept" header="Click the Sigma button to the left of the header;filter1(mask);dept " dataType="mask" format="AAA99" width="100" locked="true"></v-col>
-        <v-col id="f_nm" header=";filter2(text);first name" dataType="text" width="120" align="center" locked="true"></v-col>
-        <v-col id="l_nm" header=";filter3(text);last name" dataType="text" width="120" align="center" locked="true"></v-col>
-        <v-col id="d_o_j" header=";filter4(month);DOJ" dataType="month" width="120" locked="true"></v-col>
-        <v-col id="e_id" header="Please double click;sort1(text);Employee ID" dataType="text" width="120" align="center" locked="true" footer="MAX;MIN;AVG;SUM"></v-col>
-        <v-col id="salary" header=";sort2(number);salary" dataType="number" format="$ #,###.00" width="150" footer="$$MAX;$$MIN;$$AVG;$$SUM"></v-col>
-        <v-col id="status" header=";checkbox;status" dataType="checkbox" width="80"></v-col>
+        <v-col id="dept" header="Click the Sigma button to the left of the header;filter1(mask);dept " data-type="mask" format="AAA99" width="100" locked="true"></v-col>
+        <v-col id="f_nm" header=";filter2(text);first name" data-type="text" width="120" align="center" locked="true"></v-col>
+        <v-col id="l_nm" header=";filter3(text);last name" data-type="text" width="120" align="center" locked="true"></v-col>
+        <v-col id="d_o_j" header=";filter4(month);DOJ" data-type="month" width="120" locked="true"></v-col>
+        <v-col id="e_id" header="Please double click;sort1(text);Employee ID" data-type="text" width="120" align="center" locked="true" footer="MAX;MIN;AVG;SUM"></v-col>
+        <v-col id="salary" header=";sort2(number);salary" data-type="number" format="$ #,###.00" width="150" footer="$$MAX;$$MIN;$$AVG;$$SUM"></v-col>
+        <v-col id="status" header=";checkbox;status" data-type="checkbox" width="80"></v-col>
     </vanilla-grid>
 
     <script>
-        function vanillagrid_onBeforeCreate (e, vg) {
+        function vanillagridOnBeforeCreate (e, vg) {
             //filter, sort span customize
             vg.filterSpan = document.createElement("i");
             vg.filterSpan.setAttribute("class", "fas fa-search");
@@ -34,7 +34,7 @@
             vg.sortDescSpan.setAttribute("class", "fas fa-sort-down");
             vg.sortDescSpan.style.marginLeft = "7px";
         }
-        function vanillagrid_onAfterCreate (e, vg) {
+        function vanillagridOnAfterCreate (e, vg) {
             const data = [
                 {
                     dept : "AAA01",
