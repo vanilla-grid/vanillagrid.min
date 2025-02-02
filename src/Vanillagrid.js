@@ -1,5 +1,7 @@
 function getVanillagrid() {
     function Vanillagrid() {
+        const GRIDS = {};
+
         this.gridIds = [];
         this.sortAscSpan = null;
         this.sortDescSpan = null;
@@ -8,7 +10,12 @@ function getVanillagrid() {
         this.dataType = {};
         this.lessoreq0x7ffByte = 2;    
         this.lessoreq0xffffByte = 3;   
-        this.greater0xffffByte = 4;    
+        this.greater0xffffByte = 4;
+        this.declareWindowGridVariable = true;
+        this.get = function(gridId) {
+            if(this.gridIds.indexOf(gridId) < 0) throw new Error('The grid id is not defined.');
+            return GRIDS[gridId];
+        };
 
         this.defaultGridInfo = {};
         this.defaultGridInfo.locked = false;
@@ -145,7 +152,7 @@ function getVanillagrid() {
 
         this.create = function () {
             const vg = this;
-           const vanillagrids = document.querySelectorAll('vanilla-grid');
+            const vanillagrids = document.querySelectorAll('vanilla-grid');
             for(const vanillagrid of vanillagrids) {
                 if(!vanillagrid.getAttribute('id'))  throw new Error(`The grid's id is a required attribute.`);
                 vg.gridIds.push(vanillagrid.getAttribute('id'));
@@ -558,8 +565,6 @@ function getVanillagrid() {
                 },
                 getAttributeWithCheckRequired (attributeName, el) {
                     if (!el.getAttribute(attributeName)) {
-                        console.log(el);
-                        console.log('^ This element,');
                         throw new Error(`'`+ attributeName + `' is required.`);
                     }
                     else {
@@ -5725,7 +5730,6 @@ function getVanillagrid() {
                     return utils.redoundo(gId, false);
                 }
                 
-                
                 grid._getDataTypeStyle = () => {
                     const dataTypeStyle = {};
                     Object.keys(vg.dataType).forEach((key) => {
@@ -5768,8 +5772,8 @@ function getVanillagrid() {
                     }
                 });
                 utils.deepFreeze(gridFunc);
-                window[gId] = gridFunc;
-
+                if(vg.declareWindowGridVariable)window[gId] = gridFunc;
+                GRIDS[gId] = gridFunc;
                 
                 grid.variables = {};
                 grid.variables._activeRows = [];
@@ -7463,6 +7467,7 @@ function getVanillagrid() {
             delete this._docEvent_mousedown;
             delete this._docEvent_mouseup;
             delete this._docEvent_paste;
+            GRIDS = null;
             delete this;
         }
     }

@@ -1,6 +1,6 @@
 {
   "name": "vanillagrid",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A simple grid using only Vanilla JS.",
   "main": "dist/Vanillagrid.bundle.js",
   "scripts": {
