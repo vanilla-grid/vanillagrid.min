@@ -1,6 +1,6 @@
 function getVanillagrid() {
     function Vanillagrid() {
-        const GRIDS = {};
+        let GRIDS = {};
 
         this.gridIds = [];
         this.sortAscSpan = null;

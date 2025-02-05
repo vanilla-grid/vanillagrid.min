@@ -1,7 +1,7 @@
 # vanillagrid.min
 A simple grid using only Vanilla JS.<br><br>
 
-### Download Vanillagrid v1.0.5 release!
+### Download Vanillagrid v1.0.x release!
 https://github.com/vanilla-grid/vanillagrid.min/releases/tag/v1.0.0
 ### Or Use npm & webpack
 Home page: https://vanilla-grid.github.io
@@ -38,10 +38,10 @@ vg.create();
 ### 1-2. Or Include min.js file and use src
 
 <pre>
-&lt;script src="../Vanillangrid.min.1.0.5.js"&gt;&lt;/script&gt;
+&lt;script src="../Vanillangrid.min.1.0.x.js"&gt;&lt;/script&gt;
 </pre>
 
-#### ※ The dist/Vanillagrid.min.1.0.5.js file of git vanillagrid.min can be used as a header declaration.
+#### ※ The dist/Vanillagrid.min.1.0.x.js file of git vanillagrid.min can be used as a header declaration.
 #### ※ The dist/Vanillagrid.bundle.js file in git vanillagrid.min is used in the webpack method.
 #### ※ The header declaration method through the Vanillagrid.min file automatically manages the life cycle of the vanilla grid, while the webpack method through the Vanillagrid.bundle file requires the user to manage the life cycle.
 
