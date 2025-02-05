@@ -1,156 +1,159 @@
 function getVanillagrid() {
     function Vanillagrid() {
         let GRIDS = {};
-        const setInitThis = function(_this) {
-            _this.gridIds = [];
-            _this.sortAscSpan = null;
-            _this.sortDescSpan = null;
-            _this.filterSpan = null;
-            _this.footerFormula = {};
-            _this.dataType = {};
-            _this.lessoreq0x7ffByte = 2;    
-            _this.lessoreq0xffffByte = 3;   
-            _this.greater0xffffByte = 4;
-            _this.declareWindowGridVariable = true;
-            _this.get = function(gridId) {
-                if(_this.gridIds.indexOf(gridId) < 0) throw new Error('The grid id is not defined.');
-                return GRIDS[gridId];
-            };
-    
-            _this.defaultGridInfo = {};
-            _this.defaultGridInfo.locked = false;
-            _this.defaultGridInfo.lockedColor = true;
-            _this.defaultGridInfo.resizable = true;
-            _this.defaultGridInfo.redoable = true;
-            _this.defaultGridInfo.redoCount = 30;
-            _this.defaultGridInfo.visible = true;
-            _this.defaultGridInfo.headerVisible = true;
-            _this.defaultGridInfo.rownumVisible = true;
-            _this.defaultGridInfo.rownumSize = '60px';
-            _this.defaultGridInfo.statusVisible = true;
-            _this.defaultGridInfo.selectionPolicy = 'range';
-            _this.defaultGridInfo.nullValue = null;
-            _this.defaultGridInfo.dateFormat = 'yyyy-mm-dd';
-            _this.defaultGridInfo.monthFormat = 'yyyy-mm';
-            _this.defaultGridInfo.alterRow = true;
-            _this.defaultGridInfo.frozenColCount = 0;
-            _this.defaultGridInfo.frozenRowCount = 0;
-            _this.defaultGridInfo.sortable = true;
-            _this.defaultGridInfo.filterable = true;
-            _this.defaultGridInfo.allCheckable = true;
-            _this.defaultGridInfo.checkedValue = 'Y';
-            _this.defaultGridInfo.uncheckedValue = 'N';
-    
-            _this.defaultGridCssInfo = {};
-            _this.defaultGridCssInfo.width = '100%';
-            _this.defaultGridCssInfo.height = '600px';
-            _this.defaultGridCssInfo.margin = '0 auto';
-            _this.defaultGridCssInfo.padding = '0';
-            _this.defaultGridCssInfo.sizeLevel = 5;
-            _this.defaultGridCssInfo.verticalAlign = 'center';
-            _this.defaultGridCssInfo.cellFontSize = 14;
-            _this.defaultGridCssInfo.cellMinHeight = 21;
-            _this.defaultGridCssInfo.horizenBorderSize = 1;
-            _this.defaultGridCssInfo.verticalBorderSize = 1;
-            _this.defaultGridCssInfo.gridFontFamily = 'Arial';
-            _this.defaultGridCssInfo.editorFontFamily = 'Arial';
-            _this.defaultGridCssInfo.overflowWrap = null;
-            _this.defaultGridCssInfo.wordBreak = null;
-            _this.defaultGridCssInfo.whiteSpace = null;
-            _this.defaultGridCssInfo.linkHasUnderLine = true;
-            _this.defaultGridCssInfo.invertColor = false;
-            _this.defaultGridCssInfo.color = null;
-            _this.defaultGridCssInfo.colorSet = null;
-            _this.defaultGridCssInfo.gridBorderColor = null;
-            _this.defaultGridCssInfo.headerCellBackColor = null;
-            _this.defaultGridCssInfo.headerCellBorderColor = null;
-            _this.defaultGridCssInfo.headerCellFontColor = null;
-            _this.defaultGridCssInfo.footerCellBackColor = null;
-            _this.defaultGridCssInfo.footerCellBorderColor = null;
-            _this.defaultGridCssInfo.footerCellFontColor = null;
-            _this.defaultGridCssInfo.bodyBackColor = null;
-            _this.defaultGridCssInfo.bodyCellBackColor = null;
-            _this.defaultGridCssInfo.bodyCellBorderColor = null;
-            _this.defaultGridCssInfo.bodyCellFontColor = null;
-            _this.defaultGridCssInfo.editorBackColor = null;
-            _this.defaultGridCssInfo.editorFontColor = null;
-            _this.defaultGridCssInfo.selectCellBackColor = null;
-            _this.defaultGridCssInfo.selectCellFontColor = null;
-            _this.defaultGridCssInfo.selectColBackColor = null;
-            _this.defaultGridCssInfo.selectColFontColor = null;
-            _this.defaultGridCssInfo.selectRowBackColor = null;
-            _this.defaultGridCssInfo.selectRowFontColor = null;
-            _this.defaultGridCssInfo.mouseoverCellBackColor = null;
-            _this.defaultGridCssInfo.mouseoverCellFontColor = null;
-            _this.defaultGridCssInfo.lockCellBackColor = null;
-            _this.defaultGridCssInfo.lockCellFontColor = null;
-            _this.defaultGridCssInfo.alterRowBackColor = null;
-            _this.defaultGridCssInfo.alterRowFontColor = null;
-            _this.defaultGridCssInfo.buttonFontColor = null;
-            _this.defaultGridCssInfo.buttonBorderColor = null;
-            _this.defaultGridCssInfo.buttonBackColor = null;
-            _this.defaultGridCssInfo.buttonHoverFontColor = null;
-            _this.defaultGridCssInfo.buttonHoverBackColor = null;
-            _this.defaultGridCssInfo.buttonActiveFontColor = null;
-            _this.defaultGridCssInfo.buttonActiveBackColor = null;
-            _this.defaultGridCssInfo.linkFontColor = null;
-            _this.defaultGridCssInfo.linkHoverFontColor = null;
-            _this.defaultGridCssInfo.linkActiveFontColor = null;
-            _this.defaultGridCssInfo.linkVisitedFontColor = null;
-            _this.defaultGridCssInfo.linkFocusFontColor = null;
-    
-            _this.defaultColInfo = {};
-            _this.defaultColInfo.rowMerge = false;
-            _this.defaultColInfo.colMerge = false;
-            _this.defaultColInfo.colVisible = true;
-            _this.defaultColInfo.required = false;
-            _this.defaultColInfo.resizable = true;
-            _this.defaultColInfo.sortable = true;
-            _this.defaultColInfo.filterable = true;
-            _this.defaultColInfo.originWidth = '80px';
-            _this.defaultColInfo.dataType = 'text';
-            _this.defaultColInfo.selectSize = '100%';
-            _this.defaultColInfo.format = null;
-            _this.defaultColInfo.codes = null;
-            _this.defaultColInfo.defaultCode = null;
-            _this.defaultColInfo.maxLength = null;
-            _this.defaultColInfo.maxByte = null;
-            _this.defaultColInfo.maxNumber = null;
-            _this.defaultColInfo.minNumber = null;
-            _this.defaultColInfo.roundNumber = null;
-            _this.defaultColInfo.align = null;
-            _this.defaultColInfo.verticalAlign = null;
-            _this.defaultColInfo.overflowWrap = null;
-            _this.defaultColInfo.wordBreak = null;
-            _this.defaultColInfo.whiteSpace = null;
-            _this.defaultColInfo.backColor = null;
-            _this.defaultColInfo.fontColor = null;
-            _this.defaultColInfo.fontBold = false;
-            _this.defaultColInfo.fontItalic = false;
-            _this.defaultColInfo.fontThruline = false;
-            _this.defaultColInfo.fontUnderline = false;
-    
-            _this.checkRequiredFunction = function (cellData) {
-                if(cellData && window[cellData.gridId]) {
-                    alert(cellData.row + ' For the row, please enter the value for ' + cellData.name + '.');
-                    window[cellData.gridId].editCell(cellData.row, cellData.col);
-                }
-            };
-    
-            _this._docEvent_mousedown = null;
-            _this._docEvent_mouseup = null;
-            _this._docEvent_keydown = null;
-            _this._docEvent_copy = null;
-            _this._docEvent_paste = null;
-    
-            _this._VanillaGrid = null;
-            _this._GridHeader = null;
-            _this._GridBody = null;
-            _this._GridHeader = null;
-            _this._GridFooter = null;
-            _this._GridData = null;
+        this.gridIds = [];
+        this.sortAscSpan = null;
+        this.sortDescSpan = null;
+        this.filterSpan = null;
+        this.footerFormula = {};
+        this.dataType = {};
+        this.lessoreq0x7ffByte = 2;    
+        this.lessoreq0xffffByte = 3;   
+        this.greater0xffffByte = 4;
+        this.declareWindowGridVariable = true;
+        this.get = function(gridId) {
+            if(this.gridIds.indexOf(gridId) < 0) throw new Error('The grid id is not defined.');
+            return GRIDS[gridId];
         };
-        setInitThis(this);
+
+        this.defaultGridInfo = {};
+        this.defaultGridInfo.locked = false;
+        this.defaultGridInfo.lockedColor = true;
+        this.defaultGridInfo.resizable = true;
+        this.defaultGridInfo.redoable = true;
+        this.defaultGridInfo.redoCount = 30;
+        this.defaultGridInfo.visible = true;
+        this.defaultGridInfo.headerVisible = true;
+        this.defaultGridInfo.rownumVisible = true;
+        this.defaultGridInfo.rownumSize = '60px';
+        this.defaultGridInfo.statusVisible = true;
+        this.defaultGridInfo.selectionPolicy = 'range';
+        this.defaultGridInfo.nullValue = null;
+        this.defaultGridInfo.dateFormat = 'yyyy-mm-dd';
+        this.defaultGridInfo.monthFormat = 'yyyy-mm';
+        this.defaultGridInfo.alterRow = true;
+        this.defaultGridInfo.frozenColCount = 0;
+        this.defaultGridInfo.frozenRowCount = 0;
+        this.defaultGridInfo.sortable = true;
+        this.defaultGridInfo.filterable = true;
+        this.defaultGridInfo.allCheckable = true;
+        this.defaultGridInfo.checkedValue = 'Y';
+        this.defaultGridInfo.uncheckedValue = 'N';
+
+        this.defaultGridCssInfo = {};
+        this.defaultGridCssInfo.width = '100%';
+        this.defaultGridCssInfo.height = '600px';
+        this.defaultGridCssInfo.margin = '0 auto';
+        this.defaultGridCssInfo.padding = '0';
+        this.defaultGridCssInfo.sizeLevel = 5;
+        this.defaultGridCssInfo.verticalAlign = 'center';
+        this.defaultGridCssInfo.cellFontSize = 14;
+        this.defaultGridCssInfo.cellMinHeight = 21;
+        this.defaultGridCssInfo.horizenBorderSize = 1;
+        this.defaultGridCssInfo.verticalBorderSize = 1;
+        this.defaultGridCssInfo.gridFontFamily = 'Arial';
+        this.defaultGridCssInfo.editorFontFamily = 'Arial';
+        this.defaultGridCssInfo.overflowWrap = null;
+        this.defaultGridCssInfo.wordBreak = null;
+        this.defaultGridCssInfo.whiteSpace = null;
+        this.defaultGridCssInfo.linkHasUnderLine = true;
+        this.defaultGridCssInfo.invertColor = false;
+        this.defaultGridCssInfo.color = null;
+        this.defaultGridCssInfo.colorSet = null;
+        this.defaultGridCssInfo.gridBorderColor = null;
+        this.defaultGridCssInfo.headerCellBackColor = null;
+        this.defaultGridCssInfo.headerCellBorderColor = null;
+        this.defaultGridCssInfo.headerCellFontColor = null;
+        this.defaultGridCssInfo.footerCellBackColor = null;
+        this.defaultGridCssInfo.footerCellBorderColor = null;
+        this.defaultGridCssInfo.footerCellFontColor = null;
+        this.defaultGridCssInfo.bodyBackColor = null;
+        this.defaultGridCssInfo.bodyCellBackColor = null;
+        this.defaultGridCssInfo.bodyCellBorderColor = null;
+        this.defaultGridCssInfo.bodyCellFontColor = null;
+        this.defaultGridCssInfo.editorBackColor = null;
+        this.defaultGridCssInfo.editorFontColor = null;
+        this.defaultGridCssInfo.selectCellBackColor = null;
+        this.defaultGridCssInfo.selectCellFontColor = null;
+        this.defaultGridCssInfo.selectColBackColor = null;
+        this.defaultGridCssInfo.selectColFontColor = null;
+        this.defaultGridCssInfo.selectRowBackColor = null;
+        this.defaultGridCssInfo.selectRowFontColor = null;
+        this.defaultGridCssInfo.mouseoverCellBackColor = null;
+        this.defaultGridCssInfo.mouseoverCellFontColor = null;
+        this.defaultGridCssInfo.lockCellBackColor = null;
+        this.defaultGridCssInfo.lockCellFontColor = null;
+        this.defaultGridCssInfo.alterRowBackColor = null;
+        this.defaultGridCssInfo.alterRowFontColor = null;
+        this.defaultGridCssInfo.buttonFontColor = null;
+        this.defaultGridCssInfo.buttonBorderColor = null;
+        this.defaultGridCssInfo.buttonBackColor = null;
+        this.defaultGridCssInfo.buttonHoverFontColor = null;
+        this.defaultGridCssInfo.buttonHoverBackColor = null;
+        this.defaultGridCssInfo.buttonActiveFontColor = null;
+        this.defaultGridCssInfo.buttonActiveBackColor = null;
+        this.defaultGridCssInfo.linkFontColor = null;
+        this.defaultGridCssInfo.linkHoverFontColor = null;
+        this.defaultGridCssInfo.linkActiveFontColor = null;
+        this.defaultGridCssInfo.linkVisitedFontColor = null;
+        this.defaultGridCssInfo.linkFocusFontColor = null;
+
+        this.defaultColInfo = {};
+        this.defaultColInfo.rowMerge = false;
+        this.defaultColInfo.colMerge = false;
+        this.defaultColInfo.colVisible = true;
+        this.defaultColInfo.required = false;
+        this.defaultColInfo.resizable = true;
+        this.defaultColInfo.sortable = true;
+        this.defaultColInfo.filterable = true;
+        this.defaultColInfo.originWidth = '80px';
+        this.defaultColInfo.dataType = 'text';
+        this.defaultColInfo.selectSize = '100%';
+        this.defaultColInfo.format = null;
+        this.defaultColInfo.codes = null;
+        this.defaultColInfo.defaultCode = null;
+        this.defaultColInfo.maxLength = null;
+        this.defaultColInfo.maxByte = null;
+        this.defaultColInfo.maxNumber = null;
+        this.defaultColInfo.minNumber = null;
+        this.defaultColInfo.roundNumber = null;
+        this.defaultColInfo.align = null;
+        this.defaultColInfo.verticalAlign = null;
+        this.defaultColInfo.overflowWrap = null;
+        this.defaultColInfo.wordBreak = null;
+        this.defaultColInfo.whiteSpace = null;
+        this.defaultColInfo.backColor = null;
+        this.defaultColInfo.fontColor = null;
+        this.defaultColInfo.fontBold = false;
+        this.defaultColInfo.fontItalic = false;
+        this.defaultColInfo.fontThruline = false;
+        this.defaultColInfo.fontUnderline = false;
+
+        this.checkRequiredFunction = function (cellData) {
+            if(cellData && window[cellData.gridId]) {
+                alert(cellData.row + ' For the row, please enter the value for ' + cellData.name + '.');
+                window[cellData.gridId].editCell(cellData.row, cellData.col);
+                return;
+            }
+            if(cellData && this.get(cellData.gridId)) {
+                alert(cellData.row + ' For the row, please enter the value for ' + cellData.name + '.');
+                this.get(cellData.gridId).editCell(cellData.row, cellData.col);
+                return;
+            }
+        };
+
+        this._docEvent_mousedown = null;
+        this._docEvent_mouseup = null;
+        this._docEvent_keydown = null;
+        this._docEvent_copy = null;
+        this._docEvent_paste = null;
+
+        this._VanillaGrid = null;
+        this._GridHeader = null;
+        this._GridBody = null;
+        this._GridHeader = null;
+        this._GridFooter = null;
+        this._GridData = null;
 
         this.create = function () {
             const vg = this;
@@ -6778,7 +6781,7 @@ function getVanillagrid() {
                 }
                 connectedCallback() {
                     if (!this.style.gridTemplateColumns.includes('%')) {
-                        const _grid = window[this.gId];
+                        const _grid = vg.get(this.gId);
                         let totalWidth = 0;
                         for(let col = 1; col < _grid.getColCount(); col++) {
                             totalWidth += utils.extractNumberAndUnit(_grid.getColOriginWidth(col)).number;
@@ -6795,7 +6798,7 @@ function getVanillagrid() {
                 }
                 connectedCallback() {
                     if (!this.style.gridTemplateColumns.includes('%')) {
-                        const _grid = window[this.gId];
+                        const _grid = vg.get(this.gId);
                         let totalWidth = 0;
                         for(let col = 1; col < _grid.getColCount(); col++) {
                             totalWidth += utils.extractNumberAndUnit(_grid.getColOriginWidth(col)).number;
@@ -6812,7 +6815,7 @@ function getVanillagrid() {
                 }
                 connectedCallback() {
                     if (!this.style.gridTemplateColumns.includes('%')) {
-                        const _grid = window[this.gId];
+                        const _grid = vg.get(this.gId);
                         let totalWidth = 0;
                         if(!_grid._getFooterCells() || _grid._getFooterCells().length <= 0) return;
                         for(let col = 1; col < _grid.getColCount(); col++) {
@@ -6829,7 +6832,7 @@ function getVanillagrid() {
                     super();
                 }
                 connectedCallback() {
-                    const _grid = window[this.gId];
+                    const _grid = vg.get(this.gId);
                     const _gridInfo = _grid.getGridInfo();
                     
                     this.style.removeProperty('display');
@@ -7450,7 +7453,7 @@ function getVanillagrid() {
             document.removeEventListener('copy', this._docEvent_copy);
             document.removeEventListener('paste', this._docEvent_paste);
             GRIDS = {};
-            setInitThis(this);
+            this.gridIds = [];
         }
     }
     return new Vanillagrid();
