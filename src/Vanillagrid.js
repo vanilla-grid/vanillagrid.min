@@ -10,7 +10,6 @@ function getVanillagrid() {
         this.lessoreq0x7ffByte = 2;    
         this.lessoreq0xffffByte = 3;   
         this.greater0xffffByte = 4;
-        this.declareWindowGridVariable = true;
         this.get = function(gridId) {
             if(this.gridIds.indexOf(gridId) < 0) throw new Error('The grid id is not defined.');
             return GRIDS[gridId];
@@ -5777,7 +5776,7 @@ function getVanillagrid() {
                     }
                 });
                 utils.deepFreeze(gridFunc);
-                if(vg.declareWindowGridVariable)window[gId] = gridFunc;
+                window[gId] = gridFunc;
                 GRIDS[gId] = gridFunc;
                 
                 grid.variables = {};
@@ -6781,7 +6780,7 @@ function getVanillagrid() {
                 }
                 connectedCallback() {
                     if (!this.style.gridTemplateColumns.includes('%')) {
-                        const _grid = vg.get(this.gId);
+                        const _grid = window[this.gId];
                         let totalWidth = 0;
                         for(let col = 1; col < _grid.getColCount(); col++) {
                             totalWidth += utils.extractNumberAndUnit(_grid.getColOriginWidth(col)).number;
@@ -6798,7 +6797,7 @@ function getVanillagrid() {
                 }
                 connectedCallback() {
                     if (!this.style.gridTemplateColumns.includes('%')) {
-                        const _grid = vg.get(this.gId);
+                        const _grid = window[this.gId];
                         let totalWidth = 0;
                         for(let col = 1; col < _grid.getColCount(); col++) {
                             totalWidth += utils.extractNumberAndUnit(_grid.getColOriginWidth(col)).number;
@@ -6815,7 +6814,7 @@ function getVanillagrid() {
                 }
                 connectedCallback() {
                     if (!this.style.gridTemplateColumns.includes('%')) {
-                        const _grid = vg.get(this.gId);
+                        const _grid = window[this.gId];
                         let totalWidth = 0;
                         if(!_grid._getFooterCells() || _grid._getFooterCells().length <= 0) return;
                         for(let col = 1; col < _grid.getColCount(); col++) {
@@ -6832,7 +6831,7 @@ function getVanillagrid() {
                     super();
                 }
                 connectedCallback() {
-                    const _grid = vg.get(this.gId);
+                    const _grid = window[this.gId];
                     const _gridInfo = _grid.getGridInfo();
                     
                     this.style.removeProperty('display');
@@ -7458,5 +7457,4 @@ function getVanillagrid() {
     }
     return new Vanillagrid();
 }
-
 export default getVanillagrid();
