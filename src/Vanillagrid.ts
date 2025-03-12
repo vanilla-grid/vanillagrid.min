@@ -687,8 +687,8 @@ function getVanillagrid(): Vanillagrid {
         this.filterSpan = null;
         this.footerFormula = {};
         this.dataType = {};
-        this.lessoreq0x7ffByte = 2;    
-        this.lessoreq0xffffByte = 3;   
+        this.lessoreq0x7ffByte = 2;
+        this.lessoreq0xffffByte = 3;
         this.greater0xffffByte = 4;
         this.get = function(gridId: string): GridMethods {
             if(this.gridIds.indexOf(gridId) < 0) throw new Error('The grid id is not defined.');
