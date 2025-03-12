@@ -1,27 +1,34 @@
-const path = require('path');
+import path from 'path';
 
-module.exports = {
-  entry: './src/Vanillagrid.js',
+export default {
+  entry: './src/Vanillagrid.ts',
   output: {
     filename: 'Vanillagrid.bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    library: 'Vanillagrid',
-    libraryTarget: 'umd',
-    globalObject: 'this'
+    path: path.resolve(process.cwd(), 'dist'),
+    library: {
+      name: 'Vanillagrid',
+      type: 'umd',
+      export: 'default',
+    },
+    globalObject: "globalThis",
+    umdNamedDefine: true
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: ['@babel/preset-env', '@babel/preset-typescript']
           }
         }
       }
     ]
+  },
+  resolve: {
+    extensions: ['.ts', '.js']
   },
   mode: 'production'
 };
