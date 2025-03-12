@@ -1,7 +1,7 @@
 module.exports = {
     root: true,
-    env: {            // 추가!
-        node: true    // Node.js 환경 인식
+    env: {
+        node: true
     },
     parser: "@typescript-eslint/parser",
     plugins: ["@typescript-eslint"],
@@ -18,6 +18,7 @@ module.exports = {
         "prefer-const": "off",
         "no-prototype-builtins": "off",
         "no-empty": "off",
-        "no-case-declarations": "off"
+        "no-case-declarations": "off",
+        "no-mixed-spaces-and-tabs": "off",
     }
 };
