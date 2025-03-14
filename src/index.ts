@@ -88,33 +88,34 @@ interface DefaultColInfo {
     fontUnderline: boolean;
 }
 export interface GridInfo {
-    gIndex: number;
-    gType: string;
-    gName: string | null;
-    gLocked: boolean | null;
-    gLockedColor: boolean | null;
-    gResizable: boolean | null;
-    gRedoable: boolean | null;
-    gRedoCount: number | null;
-    gVisible: boolean | null;
-    gHeaderVisible: boolean | null;
-    gRownumVisible: boolean | null;
-    gRownumSize: string | null;
-    gRownumLockedColor: boolean | null;
-    gStatusVisible: boolean | null;
-    gStatusLockedColor: boolean | null;
-    gSelectionPolicy: SelectionPolicy.SINGLE | SelectionPolicy.RANGE | SelectionPolicy.NONE | string | null;
-    gNullValue: any | null;
-    gDateFormat: string | null;
-    gMonthFormat: string | null;
-    gAlterRow: boolean | null;
-    gFrozenColCount: number | null;
-    gFrozenRowCount: number | null;
-    gSortable: boolean | null;
-    gFilterable: boolean | null;
-    gAllCheckable: boolean | null;
-    gCheckedValue: string | null;
-    gUncheckedValue: string | null;
+    id: string;
+    index: number;
+    type: string;
+    name: string | null;
+    locked: boolean | null;
+    lockedColor: boolean | null;
+    resizable: boolean | null;
+    redoable: boolean | null;
+    redoCount: number | null;
+    visible: boolean | null;
+    headerVisible: boolean | null;
+    rownumVisible: boolean | null;
+    rownumSize: string | null;
+    rownumLockedColor: boolean | null;
+    statusVisible: boolean | null;
+    statusLockedColor: boolean | null;
+    selectionPolicy: SelectionPolicy.SINGLE | SelectionPolicy.RANGE | SelectionPolicy.NONE | string | null;
+    nullValue: any | null;
+    dateFormat: string | null;
+    monthFormat: string | null;
+    alterRow: boolean | null;
+    frozenColCount: number | null;
+    frozenRowCount: number | null;
+    sortable: boolean | null;
+    filterable: boolean | null;
+    allCheckable: boolean | null;
+    checkedValue: string | null;
+    uncheckedValue: string | null;
 }
 export interface GridCssInfo {
     width: string | null;
@@ -401,20 +402,268 @@ export interface Vanillagrid {
 export interface VanillagridConstructor {
     new (): Vanillagrid;
 }
+/**
+ * Provides various methods to manipulate and manage a Vanillagrid instance.
+ * 
+ * - This interface includes over 200 methods for handling grid structure, data,
+ *   filtering, sorting, appearance, and user interactions.
+ * - A `GridMethods` instance can be retrieved using `vg.get(gridId)`.
+ * - It allows users to dynamically modify grid properties, update cell values,
+ *   and customize the grid's behavior through predefined methods.
+ * 
+ * ### Key Features:
+ * - Manage grid headers, footers, rows, and columns.
+ * - Load and retrieve data as JSON.
+ * - Apply filters, sorting, and styling dynamically.
+ * - Control grid visibility, locking, and resizing.
+ * - Undo and redo changes within the grid.
+ * 
+ * ### Example usage:
+ * ```typescript
+ * const grid = vg.get('gridId');
+ * grid.setHeaderText('col1', 'New Header');
+ * grid.setCellValue(1, 'col1', 'Updated Value');
+ * ```
+ */
 export interface GridMethods {
+    /**
+     * Returns the number of header rows in the grid.
+     * 
+     * - Calculates the maximum header depth across all columns.
+     * - Useful for determining the hierarchical structure of headers.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * const rowCount = grid.getHeaderRowCount();
+     * console.log(rowCount); // e.g., 2
+     * ```
+     * 
+     * @returns The number of header rows.
+     */
     getHeaderRowCount(): number;
+    /**
+     * Returns the header text of the specified column.
+     * 
+     * - Retrieves the header information for the given column index or column ID.
+     * - If multiple header rows exist, the texts are concatenated using `';'`.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * const headerText = grid.getHeaderText('col1');
+     * console.log(headerText); // e.g., "Main Header;Sub Header"
+     * ```
+     * 
+     * @param colIndexOrColId The column index or column ID.
+     * @returns The concatenated header text.
+     */
     getHeaderText(colIndexOrColId: number | string): string;
+    /**
+     * Sets the header text of the specified column.
+     * 
+     * - The `value` should be a `';'`-separated string representing multi-line headers.
+     * - If the given value has fewer lines than the current header rows, empty strings are added.
+     * - If the given value has more lines than the current header rows, additional rows are created.
+     * - Reloads the header and filter values after updating.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * grid.setHeaderText('col1', 'Header1;Header2;Header3');
+     * // The column 'col1' will have:
+     * // - Row 1: "Header1"
+     * // - Row 2: "Header2"
+     * // - Row 3: "Header3"
+     * ```
+     * 
+     * @param colIndexOrColId The column index or column ID.
+     * @param value The new header text, separated by `';'` for multiple rows.
+     * @returns `true` if the update is successful.
+     */
     setHeaderText(colIndexOrColId: number | string, value: string): boolean;
+    /**
+     * Reloads all column filters in the grid.
+     * 
+     * - Refreshes the filter values for all columns.
+     * - Typically used after modifying values programmatically to ensure filters reflect the latest data.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * grid.reloadFilterValue();
+     * ```
+     * 
+     * @returns `true` if the operation is successful.
+     */
     reloadFilterValue(): boolean;
+    /**
+     * Reloads the filter for a specific column.
+     * 
+     * - Updates the filter values for the specified column index or column ID.
+     * - Typically used after modifying values programmatically to ensure the filter is updated.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * grid.reloadColFilter('col1');
+     * ```
+     * 
+     * @param colIndexOrColId The column index or column ID.
+     * @returns `true` if the operation is successful.
+     */
     reloadColFilter(colIndexOrColId: number | string): boolean;
+    /**
+     * Returns the number of footer rows in the grid.
+     * 
+     * - Calculates the maximum footer depth across all columns.
+     * - Useful for determining the hierarchical structure of footers.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * const footerRowCount = grid.getFooterRowCount();
+     * console.log(footerRowCount); // e.g., 2
+     * ```
+     * 
+     * @returns The number of footer rows.
+     */
     getFooterRowCount(): number;
+    /**
+     * Reloads all footer values in the grid.
+     * 
+     * - Updates the footer values for all columns.
+     * - Typically used after modifying values programmatically to ensure footers reflect the latest data.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * grid.reloadFooterValue();
+     * ```
+     * 
+     * @returns `true` if the operation is successful.
+     */
     reloadFooterValue(): boolean;
+    /**
+     * Sets the display value of a specific footer cell.
+     * 
+     * - Updates the visible value of the footer at the given row and column.
+     * - This change may be overridden when the footer is reloaded.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * grid.setFooterValue(1, 'col1', 'Total: 100');
+     * ```
+     * 
+     * @param row The footer row index.
+     * @param colId The column index or column ID.
+     * @param value The new footer display value.
+     * @returns `true` if the update is successful.
+     */
     setFooterValue(row: number, colIndexOrColId: number | string, value: string): boolean;
+    /**
+     * Returns the value of a specific footer cell.
+     * 
+     * - Retrieves the stored value of the footer at the given row and column.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * const footerValue = grid.getFooterValue(1, 'col1');
+     * console.log(footerValue); // e.g., "Total: 100"
+     * ```
+     * 
+     * @param row The footer row index.
+     * @param colId The column index or column ID.
+     * @returns The footer value as a string.
+     */
     getFooterValue(row: number, colIndexOrColId: number | string): string;
+    /**
+     * Sets the formula values for a specific column footer using a `';'`-separated string.
+     * 
+     * - The `formula` string should contain multiple formulas separated by `';'`.
+     * - Reloads the footer after applying the formula.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * grid.setFooterFormula('col1', '$$MAX;$$MIN;$$SUM;$$AVG');
+     * ```
+     * 
+     * @param colId The column index or column ID.
+     * @param formula The `';'`-separated string of formulas to apply.
+     * @returns `true` if the update is successful.
+     */
     setFooterFormula(colIndexOrColId: number | string, formula: string): boolean;
+    /**
+     * Returns the formula values defined for a specific column footer as a `';'`-separated string.
+     * 
+     * - If a formula is a function, it is replaced with `$$FUNC` in the returned string.
+     * - Returns `null` if no formulas are defined.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * const footerFormula = grid.getFooterFormula('col1');
+     * console.log(footerFormula); // e.g., "SUM(A1:A10);AVG(A1:A10)"
+     * ```
+     * 
+     * @param colId The column index or column ID.
+     * @returns A `';'`-separated string of footer formulas, or `null` if none exist.
+     */
     getFooterFormula(colIndexOrColId: number | string): string | null;
+    /**
+     * Defines a function for a specific footer cell.
+     * 
+     * - Sets a custom function for the footer at the given row and column.
+     * - The function receives the grid's `getValues()` result as a parameter.
+     * - Reloads the footer after setting the function.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * grid.setFooterFunction(1, 'col1', function(values) {
+     *     return values.length ? values.reduce((sum, v) => sum + v, 0) : 0;
+     * });
+     * ```
+     * 
+     * @param row The footer row index.
+     * @param colId The column index or column ID.
+     * @param func The function to apply to the footer cell.
+     * @returns `true` if the update is successful.
+     */
     setFooterFunction(row: number, colIndexOrColId: number | string, func: Function): boolean;
+    /**
+     * Returns the information of the current grid.
+     * 
+     * - Retrieves various properties related to the grid, excluding the internal `type` field.
+     * - Returns a deep-copied object to prevent unintended modifications.
+     * - Includes grid ID and CSS-related information.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * const gridInfo = grid.getGridInfo();
+     * console.log(gridInfo);
+     * ```
+     * 
+     * @returns An object containing the grid's information.
+     */
     getGridInfo(): GridInfo;
+    /**
+     * Loads data into the grid.
+     * 
+     * - Accepts data in two formats:
+     *   - **Key-Value Format**: An array of objects where keys are column IDs.
+     *   - **Datas Format**: A nested array where each cell contains an object with `id` and `value`.
+     * - Clears existing grid data before loading new data.
+     * 
+     * ### Example usage:
+     * ```typescript
+     * // Key-Value format
+     * grid.load([
+     *     { col1: 'value1-1', col2: 'value1-2' },
+     *     { col1: 'value2-1', col2: 'value2-2' }
+     * ]);
+     * 
+     * // Datas format
+     * grid.load([
+     *     [{ id: 'col1', value: 'value1-1' }, { id: 'col2', value: 'value1-2' }],
+     *     [{ id: 'col1', value: 'value2-1' }, { id: 'col2', value: 'value2-2' }]
+     * ]);
+     * ```
+     * 
+     * @param keyValueOrDatas The data to load, in key-value or datas format.
+     * @returns `true` if the data is successfully loaded.
+     */
     load(keyValueOrDatas: Record<string, any> | Record<string, any>[]): boolean;
     clear(): boolean;
     clearStatus(): boolean;
