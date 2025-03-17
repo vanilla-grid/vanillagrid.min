@@ -20,5 +20,6 @@ module.exports = {
         "no-empty": "off",
         "no-case-declarations": "off",
         "no-mixed-spaces-and-tabs": "off",
+        "no-irregular-whitespace": "off"
     }
 };
