@@ -3896,7 +3896,7 @@ function getVanillagrid(): Vanillagrid {
                     grid.__loadFooter();
                     grid.load(datas);
                     return true;
-                }
+                };
                 grid.removeCol = (colIndexOrColId: number | string): any[] => {
                     const colIndex = grid.__getColIndex(colIndexOrColId, true);
                     if (colIndex <= 2) throw new Error('The row number or status columns cannot be removed.');
@@ -3913,7 +3913,7 @@ function getVanillagrid(): Vanillagrid {
                     grid.load(datas);
 
                     return result;
-                }
+                };
                 grid.setColInfo = (colInfo: ColInfo): boolean => {
                     if (!colInfo) throw new Error('Column info is required.');
                     if (colInfo.constructor !== Object) throw new Error('Please insert a valid column info');
@@ -3955,7 +3955,7 @@ function getVanillagrid(): Vanillagrid {
                     grid.__loadFooter();
                     grid.load(datas);
                     return true;
-                }
+                };
                 grid.getColInfo = (colIndexOrColId: number | string): ColInfo => {
                     colInfo = grid.__getColInfo(colIndexOrColId);
 
@@ -4006,7 +4006,7 @@ function getVanillagrid(): Vanillagrid {
                     if (colInfo.cHeader && Array.isArray(colInfo.cHeader)) info.header = colInfo.cHeader.join(';');
                     if (colInfo.cFooter && Array.isArray(colInfo.cFooter)) info.footer = colInfo.cFooter.join(';');
                     return info;
-                }
+                };
                 grid.getColDatas = (colIndexOrColId: number | string): CellData[] => {
                     const colIndex = grid.__getColIndex(colIndexOrColId, true);
                     const colDatas = [];
@@ -4014,7 +4014,7 @@ function getVanillagrid(): Vanillagrid {
                         colDatas.push(grid.getCellData(row, colIndex));
                     }
                     return colDatas;
-                }
+                };
                 grid.setColSameValue = (colIndexOrColId: number | string, value: any, doRecode = false) : boolean => {
                     const colIndex = grid.__getColIndex(colIndexOrColId, true);
                     grid.__checkColRownumOrStatus(colIndex);
@@ -4045,7 +4045,7 @@ function getVanillagrid(): Vanillagrid {
                         colValues.push(utils.deepCopy(cell.cValue));
                     }
                     return colValues;
-                }
+                };
                 grid.getColTexts = (colIndexOrColId: number | string): string[] => {
                     const colIndex = grid.__getColIndex(colIndexOrColId, true);
                     const colTexts = [];
@@ -4053,7 +4053,7 @@ function getVanillagrid(): Vanillagrid {
                         colTexts.push(grid.getCellText(row, colIndex));
                     }
                     return colTexts;
-                }
+                };
                 grid.isColUnique = (colIndexOrColId: number | string): boolean => {
                     const colIndex = grid.__getColIndex(colIndexOrColId, true);
                     const colValues = [];
@@ -4124,15 +4124,15 @@ function getVanillagrid(): Vanillagrid {
                         });
                     }
                     grid.load(grid.getDatas());
-                }
-                grid.openColFilter = (colIndexOrColId: number | string): boolean => {
+                };
+                grid.openFilter = (colIndexOrColId: number | string): boolean => {
                     grid.__getHeaderFilter(colIndexOrColId).style.display = 'block';
                     return true;
-                }
-                grid.closeColFilter = (colIndexOrColId: number | string): boolean => {
+                };
+                grid.closeFilter = (colIndexOrColId: number | string): boolean => {
                     grid.__getHeaderFilter(colIndexOrColId).style.display = 'none';
                     return true;
-                }
+                };
                 grid.setColFilterValue = (colIndexOrColId: number | string, filterValue: string): boolean => {
                     const colInfo: CellColInfo = grid.__getColInfo(colIndexOrColId, true);
                     if(!colInfo.cFilterValues!.has(filterValue))  throw new Error('Please insert a valid filterValue. ' + Array.from(colInfo.cFilterValues!).join(', '));
@@ -5659,7 +5659,7 @@ function getVanillagrid(): Vanillagrid {
                 grid.getTargetRow = (): number | null => {
                     return grid.variables._targetCell ? grid.variables._targetCell.row : null;
                 }
-                grid.getTargetCol = (): number | null => {
+                grid.getTargetCol = (): string | null => {
                     return grid.variables._targetCell ? grid.variables._targetCell.cId : null;
                 }
                 grid.setActiveCells = (startRow: number, startColIndexOrColId: number | string, endRow: number, endColIndexOrColId: number | string): boolean => {
@@ -5681,7 +5681,7 @@ function getVanillagrid(): Vanillagrid {
                     utils.unselectCells(grid.gId);
                     return utils.selectCells(startCell, endCell, startCell);
                 }
-                grid.getActiveRows = (): number => {
+                grid.getActiveRows = (): number[] => {
                     return grid.variables._activeRows;
                 }
                 grid.getActiveCols = (): string[] => {
